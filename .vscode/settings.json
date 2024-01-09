@@ -8,5 +8,6 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "[vue]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  }
+  },
+  "conventionalCommits.scopes": ["infrastructure", "domain", "application"]
 }
