@@ -14,3 +14,10 @@ export interface CustomerDto {
   message: string;
   privacy_advise: boolean;
 }
+
+export interface CustomerRegistrationDto {
+  name: string;
+  last_name: string;
+  email: string;
+  password: string;
+}
