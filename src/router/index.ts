@@ -6,6 +6,7 @@ import {
   createWebHistory,
 } from 'vue-router';
 
+import { useCustomerStore } from 'src/stores/customer.store';
 import routes from './routes';
 
 /*
@@ -17,10 +18,9 @@ import routes from './routes';
  * with the Router instance.
  */
 
-export default route((/* { store, ssrContext } */) => {
-  const createHistory = process.env.SERVER
-    ? createMemoryHistory
-    : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory);
+export default route(() => {
+  const historyMode = process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory;
+  const createHistory = process.env.SERVER ? createMemoryHistory : historyMode;
 
   const Router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
@@ -30,6 +30,18 @@ export default route((/* { store, ssrContext } */) => {
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE),
+  });
+
+  Router.beforeEach((to, from, next) => {
+    const customerStore = useCustomerStore();
+    if (to.matched.some(
+      (record) => record.meta.requiresAuth,
+    ) && !customerStore.isCustomerLoggedIn
+    ) {
+      next('/login');
+    } else {
+      next();
+    }
   });
 
   return Router;
