@@ -1,7 +1,8 @@
-import { CustomerLoginForm } from '../../domain/CustomerLoginForm';
+import { ICustomerDto } from '../../domain/CustomerDto';
+import { ICustomerLogin } from '../../domain/CustomerLoginEntity';
 import { CustomerRepository } from '../../domain/CustomerRepository';
 
-export default function login(customerRepository: CustomerRepository, form: CustomerLoginForm)
-: void {
-  customerRepository.login(form);
+export default async function login(customerRepository: CustomerRepository, form: ICustomerLogin)
+: Promise<ICustomerDto> {
+  return customerRepository.login(form);
 }
