@@ -1,34 +1,21 @@
 import { defineStore } from 'pinia';
 import Notifier from 'src/boot/Notifier';
-import { createCustomer } from 'src/modules/customer/domain/createCustomer';
-import { createCustomerRegistrationDto } from 'src/modules/customer/domain/createCustomerRegistrationDto';
-import { Customer } from 'src/modules/customer/domain/Customer';
-import { CustomerLoginForm } from 'src/modules/customer/domain/CustomerLoginForm';
-import { CustomerRegistrationForm } from 'src/modules/customer/domain/CustomerRegistrationForm';
+import { CustomerDto } from 'src/modules/customer/domain/CustomerDto';
+import { CustomerEntity } from 'src/modules/customer/domain/CustomerEntity';
+import { ICustomerLogin } from 'src/modules/customer/domain/CustomerLoginEntity';
+import { CustomerRegistrationDto } from 'src/modules/customer/domain/CustomerRegistrationDto';
+import { ICustomerRegistrationEntity } from 'src/modules/customer/domain/CustomerRegistrationEntity';
+import login from 'src/modules/customer/application/login/login';
+
 import createLocalStorageCustomerRepository from 'src/modules/customer/infrastructure/LocalStorageCustomerRepository';
+import register from 'src/modules/customer/application/register/register';
+import updateCustomer from 'src/modules/customer/application/update-customer/updateCustomer';
 
 const repository = createLocalStorageCustomerRepository();
 
-const defaultCustomer = {
-  id: '',
-  formalTitle: '',
-  name: '',
-  lastName: '',
-  phone: '',
-  mobilePhone: '',
-  email: '',
-  state: '',
-  city: '',
-  dealer: '',
-  vehicleInterestedIn: '',
-  requiredInfoType: '',
-  message: '',
-  isPrivacyAdviceAccepted: false,
-};
-
 const defaultCustomerLoginForm = {
-  email: '',
-  password: '',
+  email: 'gus@gus.com',
+  password: '123',
 };
 
 const defaultCustomerRegistrationForm = {
@@ -40,9 +27,9 @@ const defaultCustomerRegistrationForm = {
 
 export const useCustomerStore = defineStore('customer', {
   state: () => ({
-    customer: defaultCustomer as Customer,
-    customerLoginForm: defaultCustomerLoginForm as CustomerLoginForm,
-    customerRegistrationForm: defaultCustomerRegistrationForm as CustomerRegistrationForm,
+    customer: new CustomerEntity(),
+    customerLoginForm: defaultCustomerLoginForm as ICustomerLogin,
+    customerRegistrationForm: defaultCustomerRegistrationForm as ICustomerRegistrationEntity,
   }),
 
   getters: {
@@ -52,8 +39,8 @@ export const useCustomerStore = defineStore('customer', {
   actions: {
     async login() {
       try {
-        const customer = await repository.login(this.customerLoginForm);
-        this.customer = createCustomer(customer);
+        const customer = await login(repository, this.customerLoginForm);
+        this.customer = new CustomerEntity().fromCustomerDto(customer);
 
         Notifier('Inicio de sesión realizado con éxito 🎉', 'positive');
 
@@ -65,8 +52,10 @@ export const useCustomerStore = defineStore('customer', {
 
     async register() {
       try {
-        const payload = createCustomerRegistrationDto(this.customerRegistrationForm);
-        await repository.register(payload);
+        const payload = new CustomerRegistrationDto()
+          .fromCustomerRegistrationEntity(this.customerRegistrationForm);
+
+        await register(repository, payload);
 
         Notifier('¡Registro realizado correctamente! 🎉', 'positive');
 
