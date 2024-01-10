@@ -1,7 +1,10 @@
-import { CustomerDto } from '../../domain/CustomerDto';
+import { CustomerRegistrationDto } from '../../domain/CustomerRegistrationDto';
 import { CustomerRepository } from '../../domain/CustomerRepository';
 
-export default function register(customerRepository: CustomerRepository, customer: CustomerDto)
-: void {
-  customerRepository.register(customer);
+export default async function register(
+  customerRepository: CustomerRepository,
+  customer: CustomerRegistrationDto,
+)
+: Promise<void> {
+  await customerRepository.register(customer);
 }

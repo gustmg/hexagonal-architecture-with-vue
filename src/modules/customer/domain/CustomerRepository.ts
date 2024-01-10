@@ -1,7 +1,8 @@
-import { CustomerDto, CustomerRegistrationDto } from './CustomerDto';
-import { CustomerLoginForm } from './CustomerLoginForm';
+import { ICustomerDto } from './CustomerDto';
+import { ICustomerLogin } from './CustomerLoginEntity';
+import { ICustomerRegistrationDto } from './CustomerRegistrationDto';
 
 export interface CustomerRepository {
-  login(form: CustomerLoginForm): Promise<CustomerDto>;
-  register(form: CustomerRegistrationDto): Promise<void>;
+  login(form: ICustomerLogin): Promise<ICustomerDto>;
+  register(form: ICustomerRegistrationDto): Promise<void>;
 }
