@@ -64,5 +64,16 @@ export const useCustomerStore = defineStore('customer', {
         Notifier(`Ocurrió un error al iniciar sesión: ${error}`, 'negative');
       }
     },
+
+    async updateCustomer() {
+      try {
+        const payload = new CustomerDto().fromCustomerEntity(this.customer);
+        await updateCustomer(repository, payload);
+
+        Notifier('Su información ha sido actualizada! 🎉', 'positive');
+      } catch (error) {
+        Notifier(`Ocurrió un error al actualizar su información: ${error}`, 'negative');
+      }
+    },
   },
 });
