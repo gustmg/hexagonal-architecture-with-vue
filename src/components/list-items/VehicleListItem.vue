@@ -10,11 +10,16 @@
       />
     </q-item-section>
     <q-item-section class="text-caption">
-      <q-item-label>{{ vehicle.model }}</q-item-label>
+      <q-item-label class="text-bold text-body2">
+        {{ vehicle.model }}
+      </q-item-label>
       <q-item-label>{{ vehicle.year }}</q-item-label>
       <q-item-label>{{ vehicle.color }}</q-item-label>
     </q-item-section>
-    <q-item-section side>
+    <q-item-section
+      v-if="showPrice"
+      side
+    >
       <q-item-label>${{ vehicle.price }}</q-item-label>
     </q-item-section>
   </q-item>
@@ -25,6 +30,11 @@ defineProps({
   vehicle: {
     type: Object,
     required: true,
+  },
+
+  showPrice: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>
