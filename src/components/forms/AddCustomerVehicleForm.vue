@@ -14,6 +14,7 @@
             <VehicleListItem
               :vehicle="props.opt"
               clickable
+              show-price
               @click="vehicleStore.addVehicleForm.vehicleId = props.opt.id"
             />
           </template>
