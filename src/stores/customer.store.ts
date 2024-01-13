@@ -10,6 +10,9 @@ import login from 'src/modules/customer/application/login/login';
 import createLocalStorageCustomerRepository from 'src/modules/customer/infrastructure/LocalStorageCustomerRepository';
 import register from 'src/modules/customer/application/register/register';
 import updateCustomer from 'src/modules/customer/application/update-customer/updateCustomer';
+import addVehicle from 'src/modules/customer/application/add-vehicle/addVehicle';
+import { VehicleDto } from 'src/modules/vehicle/domain/VehicleDto';
+import { useVehicleStore } from './vehicle.store';
 
 const repository = createLocalStorageCustomerRepository();
 
@@ -72,6 +75,25 @@ export const useCustomerStore = defineStore('customer', {
         await updateCustomer(repository, payload);
 
         Notifier('Su información ha sido actualizada! 🎉', 'positive');
+      } catch (error) {
+        Notifier(`Ocurrió un error al actualizar su información: ${error}`, 'negative');
+      }
+    },
+
+    async addVehicle() {
+      try {
+        const vehicleStore = useVehicleStore();
+
+        if (vehicleStore.getSelectedVehicleToAdd) {
+          const payload = new VehicleDto()
+            .fromVehicleEntity(vehicleStore.getSelectedVehicleToAdd);
+
+          await addVehicle(repository, payload);
+
+          Notifier('Vehículo agregado! 🎉', 'positive');
+        } else {
+          throw new Error('No se ha seleccionado un vehículo para agregar');
+        }
       } catch (error) {
         Notifier(`Ocurrió un error al actualizar su información: ${error}`, 'negative');
       }
