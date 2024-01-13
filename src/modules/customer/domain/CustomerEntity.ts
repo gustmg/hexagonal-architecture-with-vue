@@ -80,3 +80,7 @@ export function ensureFormIsValid({ name }: ICustomerEntity): void {
     throw new Error('Invalid customer name');
   }
 }
+
+export function isCustomerWithCompleteData(customer: ICustomerEntity): boolean {
+  return Object.values(customer).every((value) => value !== '');
+}
