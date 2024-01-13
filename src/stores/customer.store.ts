@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import Notifier from 'src/boot/Notifier';
 import { CustomerDto } from 'src/modules/customer/domain/CustomerDto';
-import { CustomerEntity } from 'src/modules/customer/domain/CustomerEntity';
+import { CustomerEntity, isCustomerWithCompleteData } from 'src/modules/customer/domain/CustomerEntity';
 import { ICustomerLogin } from 'src/modules/customer/domain/CustomerLoginEntity';
 import { CustomerRegistrationDto } from 'src/modules/customer/domain/CustomerRegistrationDto';
 import { ICustomerRegistrationEntity } from 'src/modules/customer/domain/CustomerRegistrationEntity';
@@ -34,6 +34,7 @@ export const useCustomerStore = defineStore('customer', {
 
   getters: {
     isCustomerLoggedIn: (state) => !!state.customer.email,
+    isCustomerWithCompleteData: (state) => isCustomerWithCompleteData(state.customer),
   },
 
   actions: {
