@@ -10,6 +10,7 @@
         <BaseButton
           label="Agregar"
           class="full-width"
+          @click="addVehicle()"
         />
       </div>
     </template>
@@ -17,8 +18,15 @@
 </template>
 
 <script setup lang="ts">
+import { useCustomerStore } from 'src/stores/customer.store';
 import BaseButton from '../base/BaseButton.vue';
 import BaseCard from '../base/BaseCard.vue';
 import AddCustomerVehicleForm from '../forms/AddCustomerVehicleForm.vue';
 import AddCustomerVehicleTotalSection from './AddCustomerVehicleTotalSection.vue';
+
+const customerStore = useCustomerStore();
+
+const addVehicle = async () => {
+  await customerStore.addVehicle();
+};
 </script>
