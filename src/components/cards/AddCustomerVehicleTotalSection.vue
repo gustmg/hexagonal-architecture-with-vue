@@ -3,6 +3,10 @@
     class="text-subtitle2"
     dense
   >
+    <VehicleListItem
+      v-if="vehicleStore.getSelectedVehicleToAdd"
+      :vehicle="vehicleStore.getSelectedVehicleToAdd"
+    />
     <q-item
       v-for="vehicleTotal in vehicleTotals"
       :key="vehicleTotal[0]"
@@ -21,6 +25,7 @@
 <script setup>
 import { useVehicleStore } from 'src/stores/vehicle.store';
 import { computed } from 'vue';
+import VehicleListItem from '../list-items/VehicleListItem.vue';
 
 const vehicleStore = useVehicleStore();
 
