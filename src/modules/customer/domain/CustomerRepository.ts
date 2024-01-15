@@ -8,4 +8,5 @@ export interface CustomerRepository {
   register(form: ICustomerRegistrationDto): Promise<void>;
   update(customer: ICustomerDto): Promise<void>;
   addVehicle(vehicle: IVehicleDto): Promise<void>;
+  getCustomerVehicles(): Map<string, IVehicleDto>;
 }
