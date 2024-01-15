@@ -1,3 +1,4 @@
+import { IVehicleDto, VehicleDto } from 'src/modules/vehicle/domain/VehicleDto';
 import { ICustomerLogin } from '../domain/CustomerLoginEntity';
 import { CustomerRepository } from '../domain/CustomerRepository';
 import { CustomerDto, ICustomerDto } from '../domain/CustomerDto';
@@ -11,6 +12,16 @@ function getAllCustomersFromLocalStorage():Map<string, ICustomerDto> {
   }
 
   return new Map(JSON.parse(customers) as Iterable<[string, ICustomerDto]>);
+}
+
+function getCustomerVehicles():Map<string, IVehicleDto> {
+  const vehicles = localStorage.getItem('customer-vehicles');
+
+  if (!vehicles) {
+    return new Map();
+  }
+
+  return new Map(JSON.parse(vehicles) as Iterable<[string, IVehicleDto]>);
 }
 
 async function login(loginForm: ICustomerLogin): Promise<ICustomerDto> {
@@ -47,10 +58,25 @@ function update(customer: CustomerDto): Promise<void> {
   return Promise.resolve();
 }
 
+function addVehicle(vehicle: IVehicleDto): Promise<void> {
+  const customerVehicles = getCustomerVehicles();
+
+  customerVehicles.set(
+    vehicle.id,
+    vehicle,
+  );
+
+  localStorage.setItem('customer-vehicles', JSON.stringify(Array.from(customerVehicles.entries())));
+
+  return Promise.resolve();
+}
+
 export default function createLocalStorageCustomerRepository(): CustomerRepository {
   return {
     login,
     register,
     update,
+    addVehicle,
+    getCustomerVehicles,
   };
 }
