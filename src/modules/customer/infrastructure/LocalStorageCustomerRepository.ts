@@ -63,7 +63,7 @@ function addVehicle(vehicle: IVehicleDto): Promise<void> {
 
   customerVehicles.set(
     vehicle.id,
-    new VehicleDto(vehicle),
+    vehicle,
   );
 
   localStorage.setItem('customer-vehicles', JSON.stringify(Array.from(customerVehicles.entries())));
@@ -77,5 +77,6 @@ export default function createLocalStorageCustomerRepository(): CustomerReposito
     register,
     update,
     addVehicle,
+    getCustomerVehicles,
   };
 }
