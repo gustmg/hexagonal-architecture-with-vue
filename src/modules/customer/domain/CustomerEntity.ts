@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { ICustomerDto } from './CustomerDto';
-import isCustomerNameValid from './CustomerName';
+import { isCustomerNameValid } from './CustomerName';
 import { ICustomerRegistrationDto } from './CustomerRegistrationDto';
 
 export interface ICustomerEntity {
