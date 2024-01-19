@@ -9,5 +9,8 @@
   "[vue]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-  "conventionalCommits.scopes": ["infrastructure", "domain", "application"]
+  "conventionalCommits.scopes": ["infrastructure", "domain", "application"],
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  }
 }
