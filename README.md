@@ -1,6 +1,6 @@
-# Hexagonal Arquitecture with Vue (hexagonal-arquitecture-with-vue)
+# Hexagonal Architecture with Vue (hexagonal-architecture-with-vue)
 
-A Quasar Project
+Proyecto de ejemplo aplicando conceptos de arquitectura hexagonal con Vue
 
 ## Install the dependencies
 ```bash
