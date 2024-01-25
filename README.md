@@ -4,9 +4,7 @@ Proyecto de ejemplo aplicando conceptos de arquitectura hexagonal con Vue
 
 ## Install the dependencies
 ```bash
-yarn
-# or
-npm install
+yarn install
 ```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
@@ -18,11 +16,12 @@ quasar dev
 ### Lint the files
 ```bash
 yarn lint
-# or
-npm run lint
 ```
 
-
+### Run unit tests
+```bash
+yarn test:unit
+```
 
 ### Build the app for production
 ```bash
