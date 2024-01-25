@@ -1,8 +1,8 @@
 {
-  "name": "hexagonal-arquitecture-with-vue",
+  "name": "hexagonal-architecture-with-vue",
   "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "Hexagonal Arquitecture with Vue",
+  "description": "Proyecto de ejemplo aplicando conceptos de arquitectura hexagonal con Vue",
+  "productName": "Hexagonal Architecture with Vue",
   "author": "Gustavo Mitre <gustavo.mitre.gallardo@gmail.com>",
   "private": true,
   "scripts": {
