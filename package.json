@@ -1,6 +1,6 @@
 {
   "name": "hexagonal-architecture-with-vue",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Proyecto de ejemplo aplicando conceptos de arquitectura hexagonal con Vue",
   "productName": "Hexagonal Architecture with Vue",
   "author": "Gustavo Mitre <gustavo.mitre.gallardo@gmail.com>",
@@ -12,7 +12,8 @@
     "build": "quasar build",
     "test:unit:ui": "vitest --ui",
     "test:unit": "vitest",
-    "test:unit:ci": "vitest run"
+    "test:unit:ci": "vitest run",
+    "merge:prelive1": "git checkout release/%npm_package_version%"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
