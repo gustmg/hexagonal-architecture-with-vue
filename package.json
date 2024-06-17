@@ -12,8 +12,7 @@
     "build": "quasar build",
     "test:unit:ui": "vitest --ui",
     "test:unit": "vitest",
-    "test:unit:ci": "vitest run",
-    "merge:prelive1": "git checkout release/%npm_package_version%"
+    "test:unit:ci": "vitest run"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
