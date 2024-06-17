@@ -1,6 +1,6 @@
 {
   "name": "hexagonal-architecture-with-vue",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Proyecto de ejemplo aplicando conceptos de arquitectura hexagonal con Vue",
   "productName": "Hexagonal Architecture with Vue",
   "author": "Gustavo Mitre <gustavo.mitre.gallardo@gmail.com>",
